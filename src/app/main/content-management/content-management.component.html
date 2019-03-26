@@ -1,0 +1,197 @@
+<div class="head">
+  <div class="df full-width">
+    <div class="pos-r">
+      <p-dropdown class="search-dropdown" [(ngModel)]="selectedSearchIn" [options]="searchIn"></p-dropdown>
+      <label class="lable-drb">Search in</label>
+    </div>
+    <div class="input-search">
+      <input type="text" placeholder="Search content / tag" pInputText />
+    </div>
+  </div>
+  <div class="df">
+    <div class="df ai-c c-p m-r-40 text-wrap-none">
+      <img class="m-r-10" src="assets/img/folder-open.png" alt="">
+      Load Files
+    </div>
+    <div class="df ai-c c-p text-wrap-none">
+      <img class="m-r-10" src="assets/img/files-group.png" alt="">
+      Duplicates
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+  <div class="folder-side">
+    <div class="side-head">
+      <div>
+        Folders
+      </div>
+      <div class="df ai-c">
+        <div class="m-r-40 c-p">
+          <img src="assets/img/addFolderTree.png" alt="">
+        </div>
+        <div class="c-p arrow-right">
+          <img class="animate" src="assets/img/arrow.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="body-side">
+      <p-tree [value]="filesTree0"></p-tree>
+    </div>
+  </div>
+
+  <!-- <div class="folder-side full-width m-r-0">
+    <div class="side-head"></div>
+    <div class="body-side col jc-c ai-c text-center">
+      <div class="m-b-20">
+        Welcome to SPOT
+      </div>
+      <div class="m-b-20">
+        To create your content repository, start by loading source files <br>
+        Word and PDF file are accepted
+      </div>
+      <label class="c-p ai-c df">
+        <img class="m-r-20" src="assets/img/folder-open.png" alt="">
+        Load Files
+      </label>
+    </div>
+  </div> -->
+
+  <div class="articles-side">
+    <div class="side-head">
+      <div>
+        Articles
+      </div>
+      <div class="df ai-c">
+        <img class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
+        <div class="m-r-30">
+          Add Article
+        </div>
+        <img class="c-p" width="22px" src="assets/img/trash.png" alt="">
+      </div>
+    </div>
+    <div class="body-side">
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <img class="m-r-5" src="assets/img/color-folder.png" alt="">
+          <div>
+            iPhone 7
+          </div>
+        </div>
+        <div class="c-p icons">
+          <img width="18px" src="assets/img/trash.png" alt="">
+        </div>
+      </div>
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <img class="m-r-5" src="assets/img/color-folder.png" alt="">
+          <div>
+            iPhone 7
+          </div>
+        </div>
+        <div class="c-p icons">
+          <img width="18px" src="assets/img/trash.png" alt="">
+        </div>
+      </div>
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <img class="m-r-5" src="assets/img/color-folder.png" alt="">
+          <div>
+            iPhone 7
+          </div>
+        </div>
+        <div class="c-p icons">
+          <img width="18px" src="assets/img/trash.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-side">
+    <div class="side-head">
+      <div>
+        Article
+      </div>
+      <div class="df ai-c">
+        <img class="m-r-10 c-p" src="assets/img/arrow-left.png" alt="">
+        2 of 38
+        <img class="m-l-10 rotate-180 c-p" src="assets/img/arrow-left.png" alt="">
+      </div>
+      <div class="df ai-c">
+        <div class="m-r-30 c-p">
+          <img src="assets/img/editArticle.png" alt="">
+        </div>
+        <img class="c-p" width="22px" src="assets/img/trash.png" alt="">
+      </div>
+    </div>
+    <div class="body-side text-left">
+      <div class="tags-wrap">
+        <div class="m-r-20 p-t-12">
+          Tags:
+        </div>
+        <div class="chips">
+          Self Service
+          <img class="close c-p" src="assets/img/close.png" alt="">
+        </div>
+        <input class="add-tag" type="text" placeholder="Add tag" pInputText />
+      </div>
+      <div class="p-t-10 p-l-25 p-r-25 p-b-25">
+        <p class="fs-11">
+          Content > Tecnical > Phones > iPhone > iPhone 9 >
+        </p>
+        <h4 class="fs-14">
+          Using 3D touch
+        </h4>
+        <p class="fs-12">
+          3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps,
+          reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary
+          stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+        </p>
+        <p class="fs-12">
+          3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps,
+          reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary
+          stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+        </p>
+      </div>
+      <div class="title-row jc-b bg">
+        <div class="df ai-c">
+          <div class="fs-14">
+            Questions
+          </div>
+        </div>
+        <div class="df ai-c">
+          <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
+          <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+        </div>
+      </div>
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <div>
+            Which iPhone, iPad, and iPod touch models support iOS 12?
+          </div>
+        </div>
+        <div class="c-p icons df ai-c">
+          <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
+          <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+        </div>
+      </div>
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <div>
+            Which iPhone, iPad, and iPod touch models support iOS 12?
+          </div>
+        </div>
+        <div class="c-p icons df ai-c">
+          <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
+          <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

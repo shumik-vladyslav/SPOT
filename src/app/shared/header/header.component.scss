@@ -1,0 +1,32 @@
+header {
+  height: 81px;
+  background-color: rgba(102, 102, 102, 1);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.logo-lable {
+  font-family: "Arial Bold", "Arial";
+  font-weight: 700;
+  font-style: normal;
+  font-size: 22px;
+  color: #ffffff;
+  text-align: left;
+  margin-right: 40px;
+}
+.vertical-line {
+  height: 30px;
+  border-left: 1px solid white;
+  margin-right: 40px;
+}
+nav{
+    a{
+        font-size: 16px;
+        color: #FFFFFF;
+        margin-right: 30px;
+        padding: 5px 10px;
+        &.active{
+            border-bottom: 1px solid white;
+        }
+    }
+}

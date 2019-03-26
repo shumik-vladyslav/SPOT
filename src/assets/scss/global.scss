@@ -1,0 +1,121 @@
+@import "helpers/font-size-helpers";
+@import "helpers/spacing-helpers";
+@import "mixins/breakpoints";
+
+/* ==============================================================
+Bootstrap tweaks
+===============================================================*/
+body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: "Arial";
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  color: #333333;
+  line-height: normal;
+}
+button {
+  cursor: pointer;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.hidden {
+  display: none !important;
+}
+.fw-400 {
+  font-weight: 400;
+}
+.fw-500 {
+  font-weight: 500;
+}
+.fw-600 {
+  font-weight: 600;
+}
+.fw-700 {
+  font-weight: 700;
+}
+.df {
+  display: flex;
+}
+.col {
+  display: flex;
+  flex-flow: column;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.ai-c {
+  align-items: center;
+}
+.jc-b {
+  justify-content: space-between;
+}
+.jc-e {
+  justify-content: flex-end;
+}
+.jc-c {
+  justify-content: center;
+}
+.pos-r {
+  position: relative;
+}
+.c-p {
+  cursor: pointer;
+}
+.text-wrap-none {
+  white-space: nowrap;
+}
+.full-width {
+  width: 100% !important;
+}
+.color-primary {
+  color: #2292a1;
+}
+.search-dropdown > div > label {
+  padding-top: 21px;
+  text-align: left;
+}
+.animate {
+  transition: all 0.3s;
+  &.rotate {
+    transform: rotate(180deg);
+  }
+}
+.chips {
+  height: 27px;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(121, 121, 121, 1);
+  border-radius: 10px;
+  padding: 3px 7px;
+  padding-right: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  top: 7px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  .close {
+    position: absolute;
+    right: 5px;
+    top: 7px;
+  }
+}
+
+// tree style
+.ui-tree {
+  border: none !important;
+  width: 100% !important;
+}
+.ui-treenode-icon {
+  color: #ffe999 !important;
+  text-shadow: 0 0 2px black !important;
+}
