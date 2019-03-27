@@ -1,0 +1,178 @@
+<div class="head">
+  <div class="df ai-c jc-b full-width">
+    <div [routerLink]="[ '/content-manage' ]" class="c-p df ai-c">
+      <div>
+        <img class="m-r-5" width="28px" src="assets/img/arrow-back.png" alt="">
+      </div>
+      <div class="fs-20">
+        Edit Article
+      </div>
+    </div>
+    <div class="df">
+      <div class="df ai-c m-r-15 c-p">
+        <img class="m-r-5" width="22px" src="assets/img/trash.png" alt="">
+        <div class="color-primary fs-14">Delete Article</div>
+      </div>
+      <div (click)="showPreview = true" class="df ai-c m-r-30 c-p">
+        <img class="m-r-5" width="28px" src="assets/img/view.png" alt="">
+        <div class="color-primary fs-14">Preview</div>
+      </div>
+      <div class="pos-r">
+        <input type="text" placeholder="Search in article" pInputText />
+        <div class="icon-input">
+          <img width="20px" src="assets/img/search.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fs-13 m-t-10 p-l-35">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui, deleniti!
+  </div>
+</div>
+
+<div class="content-wrap">
+  <div class="half-width">
+    <div class="side-head">
+      <div>
+        Article
+      </div>
+      <div class="df ai-c color-primary">
+        <div (click)="showEdit = true" class="c-p m-r-15">
+          <img src="assets/img/text-icon.png" alt="">
+        </div>
+        <div (click)="showEdit = false" class="c-p m-r-25 pos-r">
+          <img src="assets/img/text-icon.png" alt="">
+          <div class="close-icon-text">
+            <div class="line1"></div>
+            <div class="line2"></div>
+          </div>
+        </div>
+        <div class="df ai-c c-p">
+          <img alt="" class="m-r-10 c-p" src="assets/img/addArtictes.png">
+          <div class="m-r-30"> Add Section </div>
+        </div>
+      </div>
+    </div>
+    <div class="tags-wrap">
+      <div class="m-r-20 p-t-12">
+        Tags:
+      </div>
+      <div class="chips">
+        Self Service
+        <img class="close c-p" src="assets/img/close.png" alt="">
+      </div>
+      <input class="add-tag" type="text" placeholder="Add tag" pInputText />
+    </div>
+    <div class="body-side" style="min-height: calc(100% - 55px); padding: 20px;">
+      <div class="df ai-c m-b-30">
+        <div class="m-r-15">
+          Title:
+        </div>
+        <input class="full-width" type="text" pInputText value="3D touch" />
+      </div>
+      <div class="article-section">
+        <div class="actions-row">
+          <button class="top">
+            <img src="assets/img/arrow.png" alt="">
+          </button>
+          <button class="bot">
+            <img src="assets/img/arrow.png" alt="">
+          </button>
+          <button>
+            Edit Section
+          </button>
+          <button>
+            Delete Section
+          </button>
+        </div>
+        <div class="article-section-body">
+          <div class="text">
+            {{text}}
+          </div>
+          <textarea *ngIf="showEdit" [(ngModel)]="text"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="half-width">
+    <div class="side-head">
+      <div>
+        Questions
+      </div>
+      <div class="df ai-c">
+        <img (click)="showArticle = true" width="20px" class="m-r-20 c-p" src="assets/img/fasten.png" alt="">
+        <img width="18px" class="c-p" src="assets/img/trash.png" alt="">
+      </div>
+    </div>
+    <div class="body-side">
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <div class="icon-wrap">
+            <img src="assets/img/text-icon.png" alt="">
+          </div>
+          <div> iPhone 7 </div>
+        </div>
+      </div>
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <div class="icon-wrap">
+            <img src="assets/img/text-icon.png" alt="">
+          </div>
+          <div> iPhone 7 </div>
+        </div>
+      </div>
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <div class="icon-wrap">
+          </div>
+          <div> iPhone 7 </div>
+        </div>
+      </div>
+      <div class="articles-row jc-b">
+        <div class="df ai-c">
+          <input class="m-r-20" type="checkbox">
+          <div class="icon-wrap">
+            <img src="assets/img/text-icon.png" alt="">
+          </div>
+          <div> iPhone 7 </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showPreview" (click)="showPreview = false" class="bg-modal"></div>
+<div *ngIf="showPreview" class="modal">
+  <div class="modal-body-wrap">
+    <div class="modal-body" style="width: 80vw; max-width: 600px; padding: 40px;">
+      <div class="fs-20 color-dark m-b-40 df jc-b ai-c">
+        <div>
+          How do I use the 3D touch?
+        </div>
+        <div class="c-p" (click)="showPreview = false">
+          <img width="17px" src="assets/img/times-black.png" alt="">
+        </div>
+      </div>
+      <p class="m-b-40">
+        answer text answer text answer text answer text answer text answer text answer text answer text answer text
+        answer text answer text answer text answer text answer text answer text answer text answer text answer text
+        answer text answer text answer text answer text answer text answer text answer text answer text answer text
+        answer text answer text answer text answer text answer text answer text answer text answer text answer text
+        answer text answer text answer text answer text answer text answer text answer text answer text answer text
+        answer text answer text answer text answer text answer text answer text answer text answer text answer text
+        answer text answer text
+        answer text answer text answer text answer text answer text answer text answer text answer text answer text
+        answer text answer text answer text answer text answer text
+      </p>
+      <div class="text-center">
+        <img width="50%" src="https://d2i72ju5buk5xz.cloudfront.net/gsc/S7CLPY/b2/d9/ae/b2d9ae771c304b438af66e06287b090b/images/content_management/u880.png?token=f57138d3fdc7c929b123f700b19fd188"
+          alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-link-article [show]="showArticle" (hide)="showArticle = false"></app-link-article>

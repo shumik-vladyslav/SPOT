@@ -60,20 +60,24 @@
 }
 .article-side {
   width: 50%;
+  max-width: 550px;
 }
 .rotate-180 {
   transform: rotate(180deg);
+}
+.rotate--90 {
+  transform: rotate(-90deg);
 }
 .articles-row {
   border-bottom: 1px solid rgba(215, 215, 215, 1);
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  transition: all .3s;
+  transition: all 0.3s;
   min-height: 46px;
   .icons {
     display: none;
-    align-items: center
+    align-items: center;
   }
   &:hover {
     background: rgba(223, 245, 249, 1);
@@ -109,4 +113,79 @@
   align-items: center;
   background: #f2f2f2;
   padding: 10px 20px;
+}
+.search-row {
+  padding: 20px 20px 10px 20px;
+  display: flex;
+  font-size: 12px;
+  transition: all 0.3s;
+  border-bottom: 1px solid rgb(215, 215, 215);
+  position: relative;
+  .description {
+    overflow: hidden;
+    color: #999999;
+  }
+  .delete-icon {
+    display: none;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+  }
+  &:hover {
+    background-color: rgba(223, 245, 249, 1);
+    .delete-icon {
+      display: flex;
+    }
+  }
+}
+.stick-row {
+  font-size: 11px;
+  color: #018191;
+  display: flex;
+  margin-bottom: 5px;
+}
+.question-row {
+  border-bottom: 1px solid rgb(215, 215, 215);
+  &-head {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  &-body {
+    padding: 20px 40px 20px 40px;
+    background: rgba(242, 242, 242, 1);
+    position: relative;
+    .question-item {
+      height: 55px;
+      background: inherit;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 20px;
+      border: 1px solid rgb(215, 215, 215);
+      border-bottom: 0;
+      .trash-icon {
+        display: none;
+        align-items: center;
+        cursor: pointer;
+      }
+      &:hover {
+        background-color: rgba(223, 245, 249, 1);
+        .trash-icon {
+          display: flex;
+        }
+      }
+      &:last-child {
+        border-bottom: 1px solid rgb(215, 215, 215);
+      }
+    }
+  }
+}
+.icon-input {
+  position: absolute;
+  right: 9px;
+  top: calc(50% - 10px);
 }

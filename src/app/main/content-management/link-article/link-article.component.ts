@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { SelectItemGroup } from 'primeng/api';
 
 @Component({
-  selector: 'app-content-management',
-  templateUrl: './content-management.component.html',
-  styleUrls: ['./content-management.component.scss']
+  selector: 'app-link-article',
+  templateUrl: './link-article.component.html',
+  styleUrls: ['./link-article.component.scss']
 })
-export class ContentManagementComponent implements OnInit {
+
+export class LinkArticleComponent implements OnInit {
+  @Input() show;
+  @Output() hide = new EventEmitter;
+
   article = true;
   articles = true;
   searchResult = false;
-  welcome = false;
   folders = true;
-  dublicate = false;
 
   searchIn: SelectItem[];
   selectedSearchIn;
@@ -70,30 +72,9 @@ export class ContentManagementComponent implements OnInit {
     this.selectedSearchIn = this.searchIn[0].label;
   }
 
-  openDubicate() {
-    this.articles = false;
-    this.folders = false;
-    this.dublicate = true;
-  }
-  backContent() {
-    this.articles = true;
-    this.folders = true;
-    this.dublicate = false;
-  }
-  openSearch() {
-    this.article = true;
-    this.articles = false;
-    this.searchResult = true;
-    this.folders = false;
-    this.dublicate = false;
-  }
-
-  closeSearch() {
-    this.article = true;
-    this.articles = true;
-    this.searchResult = false;
-    this.folders = true;
-    this.dublicate = false;
+  close() {
+    this.show = false;
+    this.hide.emit('');
   }
 
 }

@@ -4,8 +4,12 @@
       <p-dropdown class="search-dropdown" [(ngModel)]="selectedSearchIn" [options]="searchIn"></p-dropdown>
       <label class="lable-drb">Search in</label>
     </div>
-    <div class="input-search">
-      <input type="text" placeholder="Search content / tag" pInputText />
+    <div class="input-search pos-r">
+      <input type="text" (focus)="openSearch()" placeholder="Search content / tag" pInputText />
+      <div class="icon-input">
+        <img *ngIf="!searchResult" class="c-p" width="20px" src="assets/img/search.png" alt="">
+        <img *ngIf="searchResult" (click)="closeSearch()" class="c-p" width="20px" src="assets/img/times-black.png" alt="">
+      </div>
     </div>
   </div>
   <div class="df">
@@ -13,7 +17,7 @@
       <img class="m-r-10" src="assets/img/folder-open.png" alt="">
       Load Files
     </div>
-    <div class="df ai-c c-p text-wrap-none">
+    <div (click)="openDubicate()" class="df ai-c c-p text-wrap-none">
       <img class="m-r-10" src="assets/img/files-group.png" alt="">
       Duplicates
     </div>
@@ -21,7 +25,8 @@
 </div>
 
 <div class="content-wrap">
-  <div class="folder-side">
+
+  <div *ngIf="folders" class="folder-side">
     <div class="side-head">
       <div>
         Folders
@@ -40,7 +45,7 @@
     </div>
   </div>
 
-  <!-- <div class="folder-side full-width m-r-0">
+  <div *ngIf="welcome" class="folder-side full-width m-r-0">
     <div class="side-head"></div>
     <div class="body-side col jc-c ai-c text-center">
       <div class="m-b-20">
@@ -55,15 +60,342 @@
         Load Files
       </label>
     </div>
-  </div> -->
+  </div>
 
-  <div class="articles-side">
+  <div *ngIf="dublicate" class="articles-side full-width">
+    <div class="side-head">
+      <div>
+        Duplicate Questions
+      </div>
+      <div (click)="backContent()" class="df ai-c c-p">
+        <img width="16px" class="m-r-5 rotate--90" src="assets/img/caret.png" alt="">
+        <div>
+          Back to content
+        </div>
+      </div>
+    </div>
+    <div class="body-side">
+      <div class="question-row">
+        <div (click)="showQuestion = !showQuestion " class="question-row-head">
+          <div [ngClass]="{'rotate-180': showQuestion}" class="m-r-10 icon animate">
+            <img src="assets/img/caret-ques.png" alt="">
+          </div>
+          <div>
+            How do I use the 3D touch? (2)
+          </div>
+        </div>
+        <div *ngIf="showQuestion" class="question-row-body">
+          <div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="df jc-e p-r-40 m-t-20">
+            <div class="df ai-c c-p">
+              <img class="m-r-5" src="assets/img/succsess.png" alt="">
+              Keep Duplicates
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="question-row">
+        <div (click)="showQuestion = !showQuestion " class="question-row-head">
+          <div [ngClass]="{'rotate-180': showQuestion}" class="m-r-10 icon animate">
+            <img src="assets/img/caret-ques.png" alt="">
+          </div>
+          <div>
+            How do I use the 3D touch? (2)
+          </div>
+        </div>
+        <div *ngIf="showQuestion" class="question-row-body">
+          <div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="df jc-e p-r-40 m-t-20">
+            <div class="df ai-c c-p">
+              <img class="m-r-5" src="assets/img/succsess.png" alt="">
+              Keep Duplicates
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="question-row">
+        <div (click)="showQuestion = !showQuestion " class="question-row-head">
+          <div [ngClass]="{'rotate-180': showQuestion}" class="m-r-10 icon animate">
+            <img src="assets/img/caret-ques.png" alt="">
+          </div>
+          <div>
+            How do I use the 3D touch? (2)
+          </div>
+        </div>
+        <div *ngIf="showQuestion" class="question-row-body">
+          <div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+            <div class="question-item">
+              <div>
+                <div class="fs-12 m-n-7">
+                  What is the camera resolution?
+                </div>
+                <div class="color-gray-600">
+                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                </div>
+              </div>
+              <div class="trash-icon">
+                <img width="22px" src="assets/img/trash.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="df jc-e p-r-40 m-t-20">
+            <div class="df ai-c c-p">
+              <img class="m-r-5" src="assets/img/succsess.png" alt="">
+              Keep Duplicates
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="searchResult" class="articles-side full-width">
+    <div class="side-head">
+      <div>
+        Search Results
+      </div>
+      <div class="df ai-c color-primary">
+        <img [routerLink]="['/article']" class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
+        <div class="m-r-30">
+          Add Article
+        </div>
+        <img class="c-p m-r-40" width="22px" src="assets/img/trash.png" alt="">
+        <div class="df ai-c c-p">
+          <img width="16px" class="m-r-5 rotate--90" src="assets/img/caret.png" alt="">
+          <div>
+            Back to content
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="body-side">
+      <div class="search-row">
+        <div>
+          <input class="m-r-20 m-t-0" type="checkbox">
+        </div>
+        <div>
+          <div class="df ai-c jc-b m-b-7">
+            <div>
+              About iPhone 7 and up
+            </div>
+            <div class="c-p delete-icon">
+              <img width="18px" src="assets/img/trash.png" alt="">
+            </div>
+          </div>
+          <div class="stick-row">
+            <div class="ai-c df">
+              <img class="m-r-3" src="assets/img/stiket.png" alt="">
+              <div>
+                Self Service
+              </div>
+            </div>
+          </div>
+          <div class="description">
+            <p style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+              For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring up quick
+              actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch, you can
+              also
+              press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions, even if
+              it's
+              simply the For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring
+              up
+              quick actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch, you
+              can also press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions,
+              even if it's simply the
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="search-row">
+        <div>
+          <input class="m-r-20 m-t-0" type="checkbox">
+        </div>
+        <div>
+          <div class="df ai-c jc-b m-b-7">
+            <div>
+              About iPhone 7 and up
+            </div>
+            <div class="c-p delete-icon">
+              <img width="18px" src="assets/img/trash.png" alt="">
+            </div>
+          </div>
+          <div class="stick-row">
+            <div class="ai-c df">
+              <img class="m-r-3" src="assets/img/stiket.png" alt="">
+              <div>
+                Self Service
+              </div>
+            </div>
+          </div>
+          <div class="description">
+            <p style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+              For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring up quick
+              actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch, you can
+              also
+              press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions, even if
+              it's
+              simply the For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring
+              up
+              quick actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch, you
+              can also press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions,
+              even if it's simply the
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="search-row">
+        <div>
+          <input class="m-r-20 m-t-0" type="checkbox">
+        </div>
+        <div>
+          <div class="df ai-c jc-b m-b-7">
+            <div>
+              About iPhone 7 and up
+            </div>
+            <div class="c-p delete-icon">
+              <img width="18px" src="assets/img/trash.png" alt="">
+            </div>
+          </div>
+          <div class="stick-row">
+            <div class="ai-c df">
+              <img class="m-r-3" src="assets/img/stiket.png" alt="">
+              <div>
+                Self Service
+              </div>
+            </div>
+          </div>
+          <div class="description">
+            <p style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+              For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring up quick
+              actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch, you can
+              also
+              press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions, even if
+              it's
+              simply the For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring
+              up
+              quick actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch, you
+              can also press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions,
+              even if it's simply the
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="articles" class="articles-side">
     <div class="side-head">
       <div>
         Articles
       </div>
-      <div class="df ai-c">
-        <img class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
+      <div class="df ai-c color-primary">
+        <img [routerLink]="['/article']" class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
         <div class="m-r-30">
           Add Article
         </div>
@@ -110,7 +442,7 @@
     </div>
   </div>
 
-  <div class="article-side">
+  <div *ngIf="article" class="article-side">
     <div class="side-head">
       <div>
         Article
@@ -122,7 +454,7 @@
       </div>
       <div class="df ai-c">
         <div class="m-r-30 c-p">
-          <img src="assets/img/editArticle.png" alt="">
+          <img [routerLink]="[ '/article' ]" src="assets/img/editArticle.png" alt="">
         </div>
         <img class="c-p" width="22px" src="assets/img/trash.png" alt="">
       </div>
@@ -164,7 +496,7 @@
         </div>
         <div class="df ai-c">
           <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
-          <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+          <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
         </div>
       </div>
       <div class="articles-row jc-b">
@@ -176,7 +508,7 @@
         </div>
         <div class="c-p icons df ai-c">
           <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
-          <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+          <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
         </div>
       </div>
       <div class="articles-row jc-b">
@@ -188,10 +520,12 @@
         </div>
         <div class="c-p icons df ai-c">
           <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
-          <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+          <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
         </div>
       </div>
     </div>
   </div>
 
 </div>
+
+<app-link-article [show]="showArticle" (hide)="showArticle = false"></app-link-article>

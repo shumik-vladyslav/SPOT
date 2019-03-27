@@ -17,6 +17,9 @@ import { FormsModule } from '@angular/forms';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputTextModule} from 'primeng/inputtext';
 import {TreeModule} from 'primeng/tree';
+import { ArticleComponent } from './main/content-management/article/article.component';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { LinkArticleComponent } from './main/content-management/link-article/link-article.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {TreeModule} from 'primeng/tree';
     MainComponent,
     ContentManagementComponent,
     WidgetManagementComponent,
-    HeaderComponent
+    HeaderComponent,
+    ArticleComponent,
+    ClickOutsideDirective,
+    LinkArticleComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { ContentManagementComponent } from './main/content-management/content-management.component';
 import { WidgetManagementComponent } from './main/widget-management/widget-management.component';
+import { ArticleComponent } from './main/content-management/article/article.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: 'content-manage', component: ContentManagementComponent },
       { path: 'widget-manage', component: WidgetManagementComponent },
+      { path: 'article', component: ArticleComponent },
     ]
   }
 ];
