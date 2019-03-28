@@ -20,6 +20,9 @@
     <div (click)="openDubicate()" class="df ai-c c-p text-wrap-none">
       <img class="m-r-10" src="assets/img/files-group.png" alt="">
       Duplicates
+      <div class="m-l-10 nitif-circle">
+        7
+      </div>
     </div>
   </div>
 </div>
@@ -75,179 +78,37 @@
       </div>
     </div>
     <div class="body-side">
-      <div class="question-row">
-        <div (click)="showQuestion = !showQuestion " class="question-row-head">
-          <div [ngClass]="{'rotate-180': showQuestion}" class="m-r-10 icon animate">
-            <img src="assets/img/caret-ques.png" alt="">
-          </div>
-          <div>
-            How do I use the 3D touch? (2)
-          </div>
-        </div>
-        <div *ngIf="showQuestion" class="question-row-body">
-          <div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
+      <div *ngFor="let item of dublicateQuestionData; let i = index;">
+        <div *ngIf="item.questions.length" class="question-row">
+          <div (click)="showQuestion = i " class="question-row-head">
+            <div [ngClass]="{'rotate-180': showQuestion === i}" class="m-r-10 icon animate">
+              <img src="assets/img/caret-ques.png" alt="">
             </div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
-            </div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
+            <div>
+              {{item.name}} ({{item.questions.length}})
             </div>
           </div>
-          <div class="df jc-e p-r-40 m-t-20">
-            <div class="df ai-c c-p">
-              <img class="m-r-5" src="assets/img/succsess.png" alt="">
-              Keep Duplicates
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="question-row">
-        <div (click)="showQuestion = !showQuestion " class="question-row-head">
-          <div [ngClass]="{'rotate-180': showQuestion}" class="m-r-10 icon animate">
-            <img src="assets/img/caret-ques.png" alt="">
-          </div>
-          <div>
-            How do I use the 3D touch? (2)
-          </div>
-        </div>
-        <div *ngIf="showQuestion" class="question-row-body">
-          <div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
+          <div *ngIf="showQuestion === i" class="question-row-body">
+            <div>
+              <div *ngFor="let dublicate of item.questions; let subIndex = index;" class="question-item">
+                <div>
+                  <div class="fs-12 m-n-7">
+                    {{dublicate.name}}
+                  </div>
+                  <div class="color-gray-600">
+                    {{dublicate.path}}
+                  </div>
                 </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
+                <div (click)="detaleItem(item.questions, subIndex)" class="trash-icon">
+                  <img width="22px" src="assets/img/trash.png" alt="">
                 </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
               </div>
             </div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
+            <div class="df jc-e p-r-40 m-t-20">
+              <div class="df ai-c c-p">
+                <img class="m-r-5" src="assets/img/succsess.png" alt="">
+                Keep Duplicates
               </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
-            </div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="df jc-e p-r-40 m-t-20">
-            <div class="df ai-c c-p">
-              <img class="m-r-5" src="assets/img/succsess.png" alt="">
-              Keep Duplicates
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="question-row">
-        <div (click)="showQuestion = !showQuestion " class="question-row-head">
-          <div [ngClass]="{'rotate-180': showQuestion}" class="m-r-10 icon animate">
-            <img src="assets/img/caret-ques.png" alt="">
-          </div>
-          <div>
-            How do I use the 3D touch? (2)
-          </div>
-        </div>
-        <div *ngIf="showQuestion" class="question-row-body">
-          <div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
-            </div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
-            </div>
-            <div class="question-item">
-              <div>
-                <div class="fs-12 m-n-7">
-                  What is the camera resolution?
-                </div>
-                <div class="color-gray-600">
-                  Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications
-                </div>
-              </div>
-              <div class="trash-icon">
-                <img width="22px" src="assets/img/trash.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="df jc-e p-r-40 m-t-20">
-            <div class="df ai-c c-p">
-              <img class="m-r-5" src="assets/img/succsess.png" alt="">
-              Keep Duplicates
             </div>
           </div>
         </div>
@@ -399,43 +260,19 @@
         <div class="m-r-30">
           Add Article
         </div>
-        <img class="c-p" width="22px" src="assets/img/trash.png" alt="">
+        <img (click)="deleteArticles()" class="c-p" width="22px" src="assets/img/trash.png" alt="">
       </div>
     </div>
     <div class="body-side">
-      <div class="articles-row jc-b">
+      <div *ngFor="let item of articlesData; let i = index" class="articles-row jc-b">
         <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
+          <input [(ngModel)]="item.checked" class="m-r-20" type="checkbox">
           <img class="m-r-5" src="assets/img/color-folder.png" alt="">
           <div>
-            iPhone 7
+            {{item.name}}
           </div>
         </div>
-        <div class="c-p icons">
-          <img width="18px" src="assets/img/trash.png" alt="">
-        </div>
-      </div>
-      <div class="articles-row jc-b">
-        <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
-          <img class="m-r-5" src="assets/img/color-folder.png" alt="">
-          <div>
-            iPhone 7
-          </div>
-        </div>
-        <div class="c-p icons">
-          <img width="18px" src="assets/img/trash.png" alt="">
-        </div>
-      </div>
-      <div class="articles-row jc-b">
-        <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
-          <img class="m-r-5" src="assets/img/color-folder.png" alt="">
-          <div>
-            iPhone 7
-          </div>
-        </div>
-        <div class="c-p icons">
+        <div (click)="detaleItem(articlesData, i)" class="c-p icons">
           <img width="18px" src="assets/img/trash.png" alt="">
         </div>
       </div>

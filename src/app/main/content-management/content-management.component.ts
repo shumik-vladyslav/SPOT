@@ -18,6 +18,31 @@ export class ContentManagementComponent implements OnInit {
   searchIn: SelectItem[];
   selectedSearchIn;
   filesTree0;
+  dublicateQuestionData = [
+    {
+      name: ' How do I use the 3D touch?',
+      questions: [
+        { name: 'What is the camera resolution?', path: 'Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications' },
+        { name: 'What is the camera resolution?', path: 'Content > Tecnical > Phones > iPhone > iPhone 7 > Specifications' },
+        { name: 'What is the camera resolution?', path: 'Content > Tecnical > Phones > iPhone > iPhone 6 > Specifications' },
+        { name: 'What is the camera resolution?', path: 'Content > Tecnical > Phones > iPhone > iPhone 5 > Specifications' }
+      ]
+    },
+    {
+      name: 'How to replace the screen?',
+      questions: [
+        { name: 'How to replace the screen?', path: 'Content > Tecnical > Phones > iPhone > iPhone 8 > Specifications' },
+        { name: 'How to replace the screen?', path: 'Content > Tecnical > Phones > iPhone > iPhone 7 > Specifications' },
+        { name: 'How to replace the screen?', path: 'Content > Tecnical > Phones > iPhone > iPhone 6 > Specifications' },
+        { name: 'How to replace the screen?', path: 'Content > Tecnical > Phones > iPhone > iPhone 5 > Specifications' }
+      ]
+    },
+  ];
+  articlesData = [
+    { name: 'iPhone 7', checked: false },
+    { name: 'iPhone 6', checked: false },
+    { name: 'iPhone 5', checked: false },
+  ];
 
   constructor() { }
 
@@ -94,6 +119,21 @@ export class ContentManagementComponent implements OnInit {
     this.searchResult = false;
     this.folders = true;
     this.dublicate = false;
+  }
+
+  detaleItem(data, index) {
+    data.splice(index, 1);
+    console.log('delete elem ', index + 1);
+  }
+
+  deleteArticles() {
+    this.articlesData = this.articlesData.filter(
+      item => {
+        if (item.checked === false) {
+          return true;
+        }
+      }
+    );
   }
 
 }

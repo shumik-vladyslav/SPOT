@@ -189,3 +189,16 @@
   right: 9px;
   top: calc(50% - 10px);
 }
+.nitif-circle{
+  background: #ff6600;
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #feb98c;
+  font-size: 10px;
+  color: white;
+}
