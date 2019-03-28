@@ -5,7 +5,8 @@
       <label class="lable-drb">Search in</label>
     </div>
     <div class="input-search pos-r">
-      <input type="text" (focus)="openSearch()" placeholder="Search content / tag" pInputText />
+      <input type="text" [(ngModel)]="searchText" (ngModelChange)="searchTextChange($event)" placeholder="Search content / tag" pInputText />
+      <!-- (focus)="openSearch()" -->
       <div class="icon-input">
         <img *ngIf="!searchResult" class="c-p" width="20px" src="assets/img/search.png" alt="">
         <img *ngIf="searchResult" (click)="closeSearch()" class="c-p" width="20px" src="assets/img/times-black.png" alt="">
@@ -35,7 +36,7 @@
         Folders
       </div>
       <div class="df ai-c">
-        <div class="m-r-40 c-p">
+        <div (click)="addFolder()" class="m-r-40 c-p">
           <img src="assets/img/addFolderTree.png" alt="">
         </div>
         <div class="c-p arrow-right">
@@ -44,7 +45,13 @@
       </div>
     </div>
     <div class="body-side">
-      <p-tree [value]="filesTree0"></p-tree>
+      <p-tree [value]="filesTree0" selectionMode="single" (onNodeSelect)="onNodeSelect($event,i)">
+        <ng-template let-node  pTemplate="default">
+          <input *ngIf="!node.label" [(ngModel)]="newText" type="text" style="width:100%">
+          <button *ngIf="!node.label" (click)="node.label = newText; newText = ''">ok</button>
+          <span *ngIf="node.label">{{node.label}}</span>
+        </ng-template>
+      </p-tree>
     </div>
   </div>
 
@@ -267,8 +274,8 @@
       <div *ngFor="let item of articlesData; let i = index" class="articles-row jc-b">
         <div class="df ai-c">
           <input [(ngModel)]="item.checked" class="m-r-20" type="checkbox">
-          <img class="m-r-5" src="assets/img/color-folder.png" alt="">
-          <div>
+          <img *ngIf="item.type === 'folder'" class="m-r-5" src="assets/img/color-folder.png" alt="">
+          <div (click)="selectType(item)">
             {{item.name}}
           </div>
         </div>
@@ -279,7 +286,7 @@
     </div>
   </div>
 
-  <div *ngIf="article" class="article-side">
+  <div *ngIf="article && selectedText" class="article-side">
     <div class="side-head">
       <div>
         Article
@@ -312,18 +319,14 @@
           Content > Tecnical > Phones > iPhone > iPhone 9 >
         </p>
         <h4 class="fs-14">
-          Using 3D touch
+          {{
+            selectedText.title
+          }}
         </h4>
         <p class="fs-12">
-          3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps,
-          reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary
-          stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
-        </p>
-        <p class="fs-12">
-          3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps,
-          reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary
-          stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
-        </p>
+        {{
+          selectedText.text
+        }} </p>
       </div>
       <div class="title-row jc-b bg">
         <div class="df ai-c">
