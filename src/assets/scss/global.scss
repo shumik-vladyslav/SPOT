@@ -165,3 +165,48 @@ button {
     }
   }
 }
+.button-default {
+  background: white;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+  min-width: 135px;
+  border: 1px solid #a6a6a6;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pi-caret-right {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  &::before {
+    content: "" !important;
+    background-image: url(/assets/img/arrow.png);
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background-size: 100%;
+    left: 3px;
+    top: 3px;
+    transform: rotate(90deg);
+    opacity: 0.5;
+  }
+}
+.pi-caret-down {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  &::before {
+    content: "" !important;
+    background-image: url(/assets/img/arrow.png);
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background-size: 100%;
+    left: 3px;
+    top: 3px;
+    transform: rotate(180deg);
+  }
+}

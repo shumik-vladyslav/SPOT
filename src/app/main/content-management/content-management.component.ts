@@ -8,6 +8,8 @@ import { SelectItemGroup } from "primeng/api";
   styleUrls: ["./content-management.component.scss"]
 })
 export class ContentManagementComponent implements OnInit {
+
+  constructor() { }
   article = true;
   articles = true;
   searchResult = false;
@@ -15,6 +17,7 @@ export class ContentManagementComponent implements OnInit {
   folders = true;
   dublicate = false;
 
+  math = Math;
   searchIn: SelectItem[];
   selectedSearchIn;
   filesTree0;
@@ -81,6 +84,9 @@ export class ContentManagementComponent implements OnInit {
       title: "Using 3D touch",
       tegs: ['3d touch', 'screen'],
       text: `3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+      3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+      3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+      3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
       3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.`
     },
     {
@@ -92,43 +98,58 @@ export class ContentManagementComponent implements OnInit {
       text: "sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
     }
   ];
-
-  constructor() {}
-  searchText = ""
+  searchText = '';
   selectedFolder;
   selectedText;
   searchResultData = [];
-
-  searchTextChange(e){
+  editPageCount;
+  editPageCountValue;
+  previewText;
+  searchTextChange(e) {
     this.searchResultData = [];
-    this.articlesData.forEach(element => {
-      if(element.type === 'text'){
-        if(element.text.includes(e)){
+    this.articlesData.forEach((element, index) => {
+      if (element.type === 'text') {
+        if (element.text.includes(e)) {
           this.searchResultData.push({
             type: "text",
-            label: element.title
-          })
+            label: element.title,
+            element: element
+          });
         }
 
-        for(let item of element.tegs){
-          if(item.includes(e)){
+        for (let item of element.tegs) {
+          if (item.includes(e)) {
             this.searchResultData.push({
               type: "teg",
-              label: item
-            })
+              label: item,
+              element: element
+            });
           }
         }
       }
-    })
-    console.log(e, this.searchResultData)
+    });
+    console.log(e, this.searchResultData);
   }
 
   onNodeSelect(e, i) {
     this.selectedFolder = e.node;
   }
-
   selectType(item) {
-    this.selectedText = item;
+    this.editPageCount = 5;
+    this.selectedText = item.text.split('.');
+    this.previewText = item.text.split('.');
+    this.previewText = this.previewText.splice(this.editPageCount - 5, this.editPageCount);
+    this.editPageCountValue = this.math.ceil(this.selectedText.length / 5);
+  }
+  selectedTextAction(flag) {
+    console.log(this.editPageCount, 'this.editPageCount');
+
+    if (flag === 'prev' && this.editPageCount > 5) {
+      this.editPageCount = this.editPageCount - 5;
+    } else if (flag === 'next' && this.editPageCount < this.selectedText.length) {
+      this.editPageCount = this.editPageCount + 5;
+    }
+    this.previewText = this.selectedText.slice(this.editPageCount - 5, this.editPageCount);
   }
 
   addFolder() {
@@ -160,6 +181,7 @@ export class ContentManagementComponent implements OnInit {
         expandedIcon: "fa fa-folder-open",
         collapsedIcon: "fa fa-folder",
         leaf: false,
+        expanded: false,
         children: [
           {
             label: "Lazy Node 0",
@@ -185,13 +207,15 @@ export class ContentManagementComponent implements OnInit {
         label: "Lazy Node 1",
         data: "Node 1",
         expandedIcon: "fa fa-folder-open",
-        collapsedIcon: "fa fa-folder"
+        collapsedIcon: "fa fa-folder",
+        expanded: false
       },
       {
         label: "Lazy Node 2",
         data: "Node 2",
         expandedIcon: "fa fa-folder-open",
-        collapsedIcon: "fa fa-folder"
+        collapsedIcon: "fa fa-folder",
+        expanded: false
       }
     ];
     this.searchIn = [
@@ -210,6 +234,7 @@ export class ContentManagementComponent implements OnInit {
     this.articles = true;
     this.folders = true;
     this.dublicate = false;
+    this.searchResult = false;
   }
   openSearch() {
     this.article = true;
@@ -237,6 +262,19 @@ export class ContentManagementComponent implements OnInit {
       if (item.checked === false) {
         return true;
       }
+    });
+  }
+  deleteSearchResults() {
+    this.searchResultData = this.searchResultData.filter(item => {
+      console.log(item, 'item');
+      if (item.element.checked === false) {
+        return true;
+      }
+    });
+  }
+  expandetTree() {
+    this.filesTree0.forEach(element => {
+      element.expanded = false;
     });
   }
 }
