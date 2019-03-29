@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'content-manage', component: ContentManagementComponent },
       { path: 'widget-manage', component: WidgetManagementComponent },
       { path: 'article/:id', component: ArticleComponent },
+      { path: 'article', component: ArticleComponent },
     ]
   }
 ];
