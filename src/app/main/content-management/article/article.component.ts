@@ -34,10 +34,12 @@ export class ArticleComponent implements OnInit {
       questins: ['Using 3D touch models support iOS 12?', 'Which iPhone, iPad, and iPod touch models support iOS 10?'],
       tegs: ['multi', 'using'],
       title: "Using 3D touch",
-      text: "sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
+      text: "sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf",
+      picture: 'http://images4.fanpop.com/image/photos/19400000/rainbow-sky-beautiful-pictures-19401741-1093-614.jpg',
     }
   ];
 
+  id;
   dialog;
   sectionData = [];
   addTagField;
@@ -60,12 +62,26 @@ export class ArticleComponent implements OnInit {
       }
       console.log(this.dataToEdit, 'dataToEdit');
     });
-    for (const key in this.dataToEdit) {
-      if (key === 'text' || key === 'picture') {
-        this.sectionData.push({
-          [key]: this.dataToEdit[key]
-        });
+    if (this.id) {
+      for (const key in this.dataToEdit) {
+        if (key === 'text' || key === 'picture') {
+          this.sectionData.push({
+            [key]: this.dataToEdit[key]
+          });
+        }
       }
+    } else {
+      this.dataToEdit = { 
+        name: "text",
+        checked: false,
+        type: "text",
+        title: "Your Title",
+        tegs: [],
+        questins: [],
+        text: `Your Text`,
+        picture: '',
+      };
+      this.sectionData = [];
     }
     console.log(this.sectionData, 'this.sectionData');
   }
@@ -92,6 +108,8 @@ export class ArticleComponent implements OnInit {
     this.showAddSection = false;
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
+      let elem = document.getElementById('editBox');
+      elem.scrollTo(0, elem.scrollHeight);
     }, 100);
   }
   moveTop(item, index) {
