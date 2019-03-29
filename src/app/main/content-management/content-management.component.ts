@@ -15,9 +15,10 @@ export class ContentManagementComponent implements OnInit {
   article = true;
   articles = true;
   searchResult = false;
-  welcome = false;
+  welcome = true;
   folders = true;
   dublicate = false;
+
   id;
   addTagField;
   math = Math;
@@ -188,6 +189,7 @@ export class ContentManagementComponent implements OnInit {
     console.log(e);
     this.selectedType = e.node.label;
     this.selectedFolder = e.node;
+    this.welcome = false;
   }
   selectType(item, index) {
     if (item.type === 'text') {

@@ -212,7 +212,7 @@
       <div *ngFor="let item of articlesData[selectedType]; let i = index" (click)="selectType(item, i)" class="articles-row jc-b">
         <div class="df ai-c">
           <input [(ngModel)]="item.checked" class="m-r-20" type="checkbox">
-          <img *ngIf="item.type === 'folder'" class="m-r-5" src="assets/img/color-folder.png" alt="">
+          <i *ngIf="item.type === 'folder'" class="m-r-5" class="fa fa-folder m-r-20 icon-folder"></i>
           <div>
             {{item.name}}
           </div>
