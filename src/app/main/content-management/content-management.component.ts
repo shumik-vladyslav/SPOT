@@ -16,13 +16,15 @@ export class ContentManagementComponent implements OnInit {
   welcome = false;
   folders = true;
   dublicate = false;
-
+  id;
+  addTagField;
   math = Math;
   searchIn: SelectItem[];
   selectedSearchIn;
   filesTree0;
+  questuonSettings = {};
   dublicateQuestionData = [
-    {
+    { 
       name: " How do I use the 3D touch?",
       questions: [
         {
@@ -74,15 +76,17 @@ export class ContentManagementComponent implements OnInit {
     }
   ];
   articlesData = [
-    { name: "iPhone 7", checked: false, type: "folder" },
-    { name: "iPhone 6", checked: false, type: "folder" },
-    { name: "iPhone 5", checked: false, type: "folder" },
+    { id: "1", name: "iPhone 7", checked: false, type: "folder" },
+    { id: "2", name: "iPhone 6", checked: false, type: "folder" },
+    { id: "3", name: "iPhone 5", checked: false, type: "folder" },
     {
+      id: "4", 
       name: "text",
       checked: false,
       type: "text",
       title: "Using 3D touch",
       tegs: ['3d touch', 'screen'],
+      questins: ['Which iPhone, iPad, and iPod touch models support iOS 1?','Which iPhone, iPad, and iPod touch models support iOS 2?','Which iPhone, iPad, and iPod touch models support iOS 3?','Which iPhone, iPad, and iPod touch models support iOS 4?', 'Which iPhone, iPad, and iPod touch models support iOS 5?'],
       text: `3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
       3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
       3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
@@ -90,9 +94,11 @@ export class ContentManagementComponent implements OnInit {
       3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.`
     },
     {
+      id: "5", 
       name: "text 5",
       checked: false,
       type: "text",
+      questins: ['Using 3D touch models support iOS 12?', 'Which iPhone, iPad, and iPod touch models support iOS 10?'],
       tegs: ['multi', 'using'],
       title: "Using 3D touch",
       text: "sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
@@ -134,22 +140,26 @@ export class ContentManagementComponent implements OnInit {
   onNodeSelect(e, i) {
     this.selectedFolder = e.node;
   }
-  selectType(item) {
-    this.editPageCount = 5;
-    this.selectedText = item.text.split('.');
-    this.previewText = item.text.split('.');
-    this.previewText = this.previewText.splice(this.editPageCount - 5, this.editPageCount);
-    this.editPageCountValue = this.math.ceil(this.selectedText.length / 5);
+  selectType(item, index) {
+    if (item.type === 'text') {
+      this.editPageCount = 5;
+      this.selectedText = item;
+      console.log(item, 'item');
+      this.previewText = item.text.split('.');
+      this.previewText = this.previewText.slice(this.editPageCount - 5, this.editPageCount);
+      this.editPageCountValue = this.math.ceil(this.selectedText.text.split('.').length / 5);
+    }
+    this.id = item.id;
   }
   selectedTextAction(flag) {
     console.log(this.editPageCount, 'this.editPageCount');
 
     if (flag === 'prev' && this.editPageCount > 5) {
       this.editPageCount = this.editPageCount - 5;
-    } else if (flag === 'next' && this.editPageCount < this.selectedText.length) {
+    } else if (flag === 'next' && this.editPageCount < this.selectedText.text.split('.').length) {
       this.editPageCount = this.editPageCount + 5;
     }
-    this.previewText = this.selectedText.slice(this.editPageCount - 5, this.editPageCount);
+    this.previewText = this.selectedText.text.split('.').slice(this.editPageCount - 5, this.editPageCount);
   }
 
   addFolder() {
@@ -254,9 +264,13 @@ export class ContentManagementComponent implements OnInit {
 
   detaleItem(data, index) {
     data.splice(index, 1);
-    console.log("delete elem ", index + 1);
+    console.log('delete elem', index + 1);
   }
-
+  addTags(data, value) {
+    data.push(value);
+    console.log(data, 'data');
+    this.addTagField = '';
+  }
   deleteArticles() {
     this.articlesData = this.articlesData.filter(item => {
       if (item.checked === false) {
@@ -271,6 +285,16 @@ export class ContentManagementComponent implements OnInit {
         return true;
       }
     });
+  }
+  deleteQuestion() {
+    let count = 0;
+    for (const key in this.questuonSettings) {
+      if (this.questuonSettings[key]) {
+        this.selectedText.questins.splice(+key - count, 1);
+        count++;
+      }
+    }
+    this.questuonSettings = {};
   }
   expandetTree() {
     this.filesTree0.forEach(element => {

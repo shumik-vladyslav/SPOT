@@ -2,13 +2,12 @@
 @import "helpers/spacing-helpers";
 @import "mixins/breakpoints";
 
-/* ==============================================================
-Bootstrap tweaks
-===============================================================*/
 * {
   box-sizing: border-box;
 }
-
+html{
+  scroll-behavior: smooth;
+}
 body {
   overflow-x: hidden;
   margin: 0;

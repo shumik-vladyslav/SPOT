@@ -20,6 +20,7 @@ import {TreeModule} from 'primeng/tree';
 import { ArticleComponent } from './main/content-management/article/article.component';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 import { LinkArticleComponent } from './main/content-management/link-article/link-article.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LinkArticleComponent } from './main/content-management/link-article/lin
     HeaderComponent,
     ArticleComponent,
     ClickOutsideDirective,
-    LinkArticleComponent
+    LinkArticleComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

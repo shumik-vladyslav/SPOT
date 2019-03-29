@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       { path: 'content-manage', component: ContentManagementComponent },
       { path: 'widget-manage', component: WidgetManagementComponent },
-      { path: 'article', component: ArticleComponent },
+      { path: 'article/:id', component: ArticleComponent },
     ]
   }
 ];

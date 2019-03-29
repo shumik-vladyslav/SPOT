@@ -1,6 +1,6 @@
 <div class="head">
   <div class="df ai-c jc-b full-width">
-    <div [routerLink]="[ '/content-manage' ]" class="c-p df ai-c">
+    <div (click)="dialog = true" class="c-p df ai-c">
       <div>
         <img class="m-r-5" width="28px" src="assets/img/arrow-back.png" alt="">
       </div>
@@ -37,19 +37,61 @@
         Article
       </div>
       <div class="df ai-c color-primary">
-        <div (click)="showEdit = true" class="c-p m-r-15">
+        <div class="c-p m-r-15">
           <img src="assets/img/text-icon.png" alt="">
         </div>
-        <div (click)="showEdit = false" class="c-p m-r-25 pos-r">
+        <div class="c-p m-r-25 pos-r">
           <img src="assets/img/text-icon.png" alt="">
           <div class="close-icon-text">
             <div class="line1"></div>
             <div class="line2"></div>
           </div>
         </div>
-        <div class="df ai-c c-p">
-          <img alt="" class="m-r-10 c-p" src="assets/img/addArtictes.png">
+        <div (clickOutside)="showAddSection = false" class="df ai-c c-p pos-r">
+          <img (click)="showAddSection = !showAddSection" alt="" class="m-r-10 c-p" src="assets/img/addArtictes.png">
           <div class="m-r-30"> Add Section </div>
+          <div *ngIf="showAddSection" class="add-section-drb">
+            <div (click)="addSection('text')" class="add-section-drb--item">
+              <div class="icon-wrap">
+                <img src="assets/img/text-drb.png" alt="">
+              </div>
+              <div>
+                Text
+              </div>
+            </div>
+            <div (click)="addSection('picture')" class="add-section-drb--item">
+              <div class="icon-wrap">
+                <img src="assets/img/img-drb.png" alt="">
+              </div>
+              <div>
+                Picture
+              </div>
+            </div>
+            <div (click)="addSection('video')" class="add-section-drb--item">
+              <div class="icon-wrap">
+                <img src="assets/img/video-drb.png" alt="">
+              </div>
+              <div>
+                Video
+              </div>
+            </div>
+            <div (click)="addSection('link')" class="add-section-drb--item">
+              <div class="icon-wrap">
+                <img src="assets/img/link-drb.png" alt="">
+              </div>
+              <div>
+                Link
+              </div>
+            </div>
+            <div (click)="addSection('button')" class="add-section-drb--item">
+              <div class="icon-wrap">
+                <img src="assets/img/button-drb.png" alt="">
+              </div>
+              <div>
+                Button
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,39 +99,50 @@
       <div class="m-r-20 p-t-12">
         Tags:
       </div>
-      <div class="chips">
-        Self Service
-        <img class="close c-p" src="assets/img/close.png" alt="">
+      <div *ngFor="let tag of dataToEdit.tegs; let i = index" class="chips">
+        {{tag}}
+        <img (click)="detaleItem(dataToEdit.tegs, i)" class="close c-p" src="assets/img/close.png" alt="">
       </div>
-      <input class="add-tag" type="text" placeholder="Add tag" pInputText />
+      <input [(ngModel)]="addTagField" class="add-tag" type="text" (keyup.enter)="addTags(dataToEdit.tegs, addTagField)"
+        placeholder="Add tag" pInputText />
     </div>
-    <div class="body-side" style="min-height: calc(100% - 55px); padding: 20px;">
+    <div class="body-side body-side-scroll" style="min-height: calc(100% - 55px); padding: 20px;">
       <div class="df ai-c m-b-30">
         <div class="m-r-15">
           Title:
         </div>
-        <input class="full-width" type="text" pInputText value="3D touch" />
+        <input class="full-width" [(ngModel)]="dataToEdit.title" type="text" pInputText value="3D touch" />
       </div>
-      <div class="article-section">
-        <div class="actions-row">
-          <button class="top">
-            <img src="assets/img/arrow.png" alt="">
-          </button>
-          <button class="bot">
-            <img src="assets/img/arrow.png" alt="">
-          </button>
-          <button>
-            Edit Section
-          </button>
-          <button>
-            Delete Section
-          </button>
-        </div>
-        <div class="article-section-body">
-          <div class="text">
-            {{text}}
+      <div *ngFor="let item of sectionData; let i = index">
+        <div class="article-section">
+          <div class="actions-row">
+            <button (click)="moveTop(item, i)" class="top">
+              <img src="assets/img/arrow.png" alt="">
+            </button>
+            <button (click)="moveBot(item, i)" class="bot">
+              <img src="assets/img/arrow.png" alt="">
+            </button>
+            <button *ngIf="showEdit !== i" (click)="showEdit = i">
+              Edit Section
+            </button>
+            <button *ngIf="showEdit === i" (click)="showEdit = null">
+              Save Section
+            </button>
+            <button (click)="detaleItem(sectionData, i)">
+              Delete Section
+            </button>
           </div>
-          <textarea *ngIf="showEdit" [(ngModel)]="text"></textarea>
+          <div class="article-section-body">
+            <div *ngIf="item.text">
+              <div class="text">
+                {{item.text}}
+              </div>
+              <textarea *ngIf="showEdit === i" [(ngModel)]="item.text"></textarea>
+            </div>
+            <div class="text-center" *ngIf="item.picture">
+              <img style="max-width: 70%; max-height: 400px" [src]="item.picture" alt="">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -150,29 +203,24 @@
     <div class="modal-body" style="width: 80vw; max-width: 600px; padding: 40px;">
       <div class="fs-20 color-dark m-b-40 df jc-b ai-c">
         <div>
-          How do I use the 3D touch?
+          {{dataToEdit.title}}
         </div>
         <div class="c-p" (click)="showPreview = false">
           <img width="17px" src="assets/img/times-black.png" alt="">
         </div>
       </div>
-      <p class="m-b-40">
-        answer text answer text answer text answer text answer text answer text answer text answer text answer text
-        answer text answer text answer text answer text answer text answer text answer text answer text answer text
-        answer text answer text answer text answer text answer text answer text answer text answer text answer text
-        answer text answer text answer text answer text answer text answer text answer text answer text answer text
-        answer text answer text answer text answer text answer text answer text answer text answer text answer text
-        answer text answer text answer text answer text answer text answer text answer text answer text answer text
-        answer text answer text
-        answer text answer text answer text answer text answer text answer text answer text answer text answer text
-        answer text answer text answer text answer text answer text
-      </p>
-      <div class="text-center">
-        <img width="50%" src="https://d2i72ju5buk5xz.cloudfront.net/gsc/S7CLPY/b2/d9/ae/b2d9ae771c304b438af66e06287b090b/images/content_management/u880.png?token=f57138d3fdc7c929b123f700b19fd188"
-          alt="">
+      <div *ngFor="let item of sectionData">
+        <p *ngIf="item.text" class="m-b-40">
+          {{item.text}}
+        </p>
+        <div *ngIf="item.picture" class="text-center">
+          <img style="max-height: 400px; max-width: 80%;" [src]="item.picture"
+            alt="">
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <app-link-article [show]="showArticle" (hide)="showArticle = false"></app-link-article>
+<app-dialog *ngIf="dialog" [question]="'Are you sure you want to discard all changes?'" (result)="answer($event)"></app-dialog>

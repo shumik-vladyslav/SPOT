@@ -167,7 +167,7 @@
         <div>
           <input class="m-r-20 m-t-0" [(ngModel)]="item.element.checked" type="checkbox">
         </div>
-        <div (click)="selectType(item.element)">
+        <div (click)="selectType(item.element, i)">
           <div class="df ai-c jc-b m-b-7">
             <div>
               {{item.element.title}}
@@ -208,7 +208,7 @@
       </div>
     </div>
     <div class="body-side">
-      <div *ngFor="let item of articlesData; let i = index" (click)="selectType(item)" class="articles-row jc-b">
+      <div *ngFor="let item of articlesData; let i = index" (click)="selectType(item, i)" class="articles-row jc-b">
         <div class="df ai-c">
           <input [(ngModel)]="item.checked" class="m-r-20" type="checkbox">
           <img *ngIf="item.type === 'folder'" class="m-r-5" src="assets/img/color-folder.png" alt="">
@@ -235,7 +235,7 @@
       </div>
       <div class="df ai-c">
         <div class="m-r-30 c-p">
-          <img [routerLink]="[ '/article' ]" src="assets/img/editArticle.png" alt="">
+          <img [routerLink]="[ '/article', id]" a src="assets/img/editArticle.png" alt="">
         </div>
         <img class="c-p" width="22px" src="assets/img/trash.png" alt="">
       </div>
@@ -245,11 +245,11 @@
         <div class="m-r-20 p-t-12">
           Tags:
         </div>
-        <div class="chips">
-          Self Service
-          <img class="close c-p" src="assets/img/close.png" alt="">
+        <div *ngFor="let tags of selectedText.tegs; let i = index" class="chips">
+          {{tags}}
+          <img (click)="detaleItem(selectedText.tegs, i)" class="close c-p" src="assets/img/close.png" alt="">
         </div>
-        <input class="add-tag" type="text" placeholder="Add tag" pInputText />
+        <input [(ngModel)]="addTagField" class="add-tag" type="text" (keyup.enter)="addTags(selectedText.tegs, addTagField)" placeholder="Add tag" pInputText />
       </div>
       <div class="p-t-10 p-l-25 p-r-25 p-b-25">
         <p class="fs-11">
@@ -273,31 +273,19 @@
           </div>
         </div>
         <div class="df ai-c">
-          <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
+          <img (click)="deleteQuestion()" class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
           <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
         </div>
       </div>
-      <div class="articles-row jc-b">
+      <div *ngFor="let item of selectedText.questins; let i = index" class="articles-row jc-b">
         <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
+          <input [(ngModel)]="questuonSettings[i]" class="m-r-20" type="checkbox">
           <div>
-            Which iPhone, iPad, and iPod touch models support iOS 12?
+            {{item}}
           </div>
         </div>
         <div class="c-p icons df ai-c">
-          <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
-          <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
-        </div>
-      </div>
-      <div class="articles-row jc-b">
-        <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
-          <div>
-            Which iPhone, iPad, and iPod touch models support iOS 12?
-          </div>
-        </div>
-        <div class="c-p icons df ai-c">
-          <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
+          <img (click)="detaleItem(selectedText.questins, i)" class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
           <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
         </div>
       </div>
