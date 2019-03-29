@@ -153,44 +153,28 @@
         Questions
       </div>
       <div class="df ai-c">
+        <img (click)="editQuestion()" width="20px" class="m-r-20 c-p" src="assets/img/editArticle.png" alt="">
         <img (click)="showArticle = true" width="20px" class="m-r-20 c-p" src="assets/img/fasten.png" alt="">
-        <img width="18px" class="c-p" src="assets/img/trash.png" alt="">
+        <img (click)="deleteQuestion()" width="18px" class="c-p" src="assets/img/trash.png" alt="">
       </div>
     </div>
     <div class="body-side">
-      <div class="articles-row jc-b">
+      <div *ngFor="let item of questions; let i = index" class="articles-row jc-b">
         <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
+          <input class="m-r-20" [(ngModel)]="item.checked" type="checkbox">
           <div class="icon-wrap">
             <img src="assets/img/text-icon.png" alt="">
           </div>
-          <div> iPhone 7 </div>
-        </div>
-      </div>
-      <div class="articles-row jc-b">
-        <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
-          <div class="icon-wrap">
-            <img src="assets/img/text-icon.png" alt="">
+          <div (dblclick)="item.edit = true" *ngIf="!item.edit"> {{item.question}} </div>
+          <div class="df ai-c wrap" *ngIf="item.edit">
+            <input type="text" [(ngModel)]="item.question" pInputText />
+            <button *ngIf="item.edit" (click)="item.edit = false" class="button-default">
+              Save
+            </button>
           </div>
-          <div> iPhone 7 </div>
         </div>
-      </div>
-      <div class="articles-row jc-b">
-        <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
-          <div class="icon-wrap">
-          </div>
-          <div> iPhone 7 </div>
-        </div>
-      </div>
-      <div class="articles-row jc-b">
-        <div class="df ai-c">
-          <input class="m-r-20" type="checkbox">
-          <div class="icon-wrap">
-            <img src="assets/img/text-icon.png" alt="">
-          </div>
-          <div> iPhone 7 </div>
+        <div (click)="detaleItem(questions, i)" class="c-p icons">
+          <img alt="" src="assets/img/trash.png" width="18px">
         </div>
       </div>
     </div>
@@ -214,8 +198,7 @@
           {{item.text}}
         </p>
         <div *ngIf="item.picture" class="text-center">
-          <img style="max-height: 400px; max-width: 80%;" [src]="item.picture"
-            alt="">
+          <img style="max-height: 400px; max-width: 80%;" [src]="item.picture" alt="">
         </div>
       </div>
     </div>

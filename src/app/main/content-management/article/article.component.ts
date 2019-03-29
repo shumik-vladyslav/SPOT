@@ -45,6 +45,12 @@ export class ArticleComponent implements OnInit {
   addTagField;
   showPreview;
   showAddSection;
+  questions = [
+    { question: 'test', checked: false, edit: false },
+    { question: 'test', checked: false, edit: false },
+    { question: 'test', checked: false, edit: false },
+    { question: 'test', checked: false, edit: false },
+  ];
   // tslint:disable-next-line:max-line-length
   text = `3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.  If you have an iPhone 6s or later, you can also press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions, even if it's simply the standard App Store app shortcut that lets you share the app with someone else. Some apps have several quick actions, including dynamic quick actions that update based on the last person you contacted, article you read, show you watched, etc. Tap on an action to go directly to that feature or content in the app.`;
   constructor(private activatedRoute: ActivatedRoute, private route: Router) { }
@@ -71,7 +77,7 @@ export class ArticleComponent implements OnInit {
         }
       }
     } else {
-      this.dataToEdit = { 
+      this.dataToEdit = {
         name: "text",
         checked: false,
         type: "text",
@@ -89,6 +95,20 @@ export class ArticleComponent implements OnInit {
   detaleItem(data, index) {
     data.splice(index, 1);
     console.log('delete elem', index + 1);
+  }
+  deleteQuestion() {
+    this.questions = this.questions.filter(item => {
+      if (item.checked === false) {
+        return true;
+      }
+    });
+  }
+  editQuestion() {
+    for (const key in this.questions) {
+      if (this.questions[key].checked === true) {
+        this.questions[key].edit = true;
+      }
+    }
   }
   addTags(data, value) {
     data.push(value);
