@@ -18,9 +18,29 @@
             <label class="lable-drb">Search in</label>
           </div>
           <div class="input-search pos-r">
-            <input type="text" placeholder="Search content / tag" pInputText />
+            <input type="text" [(ngModel)]="searchText" (ngModelChange)="searchTextChange($event)" placeholder="Search content / tag"
+              pInputText />
+            <div *ngIf="searchText.length && searchResultData.length" class="serch-result-dropdawn">
+              <div (click)="openSearch(); searchText = ''" *ngFor="let item of searchResultData" class="serch-result-dropdawn--item">
+                <div class="serch-result-dropdawn--icon-wrap">
+                  <img *ngIf="item.type === 'teg'" src="assets/img/stiket.png" alt="">
+                  <img *ngIf="item.type === 'text'" src="assets/img/file.png" alt="">
+                </div>
+                <div>
+                  <div class="serch-result-dropdawn--lable">
+                    {{item.label}}
+                  </div>
+                </div>
+              </div>
+              <div (click)="openSearch(); searchText = ''" class="serch-result-dropdawn--foot">
+                More results
+              </div>
+            </div>
+            <!-- (focus)="openSearch()" -->
             <div class="icon-input">
-              <img width="20px" src="assets/img/search.png" alt="">
+              <img *ngIf="!searchResult" class="c-p" width="20px" src="assets/img/search.png" alt="">
+              <img *ngIf="searchResult" (click)="closeSearch(); searchText = ''" class="c-p" width="20px" src="assets/img/times-black.png"
+                alt="">
             </div>
           </div>
         </div>
@@ -33,31 +53,40 @@
                 Folders
               </div>
               <div class="df ai-c">
-                <div class="m-r-40 c-p">
+                <div (click)="addFolder()" class="m-r-40 c-p">
                   <img src="assets/img/addFolderTree.png" alt="">
                 </div>
-                <div class="c-p arrow-right">
+                <div (click)="expandetTree()" class="c-p arrow-right">
                   <img class="animate" src="assets/img/arrow.png" alt="">
                 </div>
               </div>
             </div>
             <div class="body-side">
-              <p-tree [value]="filesTree0"></p-tree>
+              <p-tree [value]="filesTree0" selectionMode="single" (onNodeSelect)="onNodeSelect($event,i)">
+                <ng-template let-node pTemplate="default">
+                  <div class="df ai-c">
+                    <input *ngIf="!node.label" [(ngModel)]="newText" type="text" pInputText style="width: 85px">
+                    <button *ngIf="!node.label" (click)="node.label = newText; newText = ''" class="button-default m-l-5"
+                      style="min-width: 35px;">ok</button>
+                  </div>
+                  <span *ngIf="node.label">{{node.label}}</span>
+                </ng-template>
+              </p-tree>
             </div>
           </div>
 
-          <div *ngIf="searchResult" class="articles-side full-width">
+          <div *ngIf="searchResult" class="articles-side full-width ">
             <div class="side-head">
               <div>
                 Search Results
               </div>
               <div class="df ai-c color-primary">
-                <img class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
+                <img [routerLink]="['/article']" class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
                 <div class="m-r-30">
                   Add Article
                 </div>
-                <img class="c-p m-r-40" width="22px" src="assets/img/trash.png" alt="">
-                <div class="df ai-c c-p">
+                <img (click)="deleteSearchResults()" class="c-p m-r-40" width="22px" src="assets/img/trash.png" alt="">
+                <div (click)="backContent()" class="df ai-c c-p">
                   <img width="16px" class="m-r-5 rotate--90" src="assets/img/caret.png" alt="">
                   <div>
                     Back to content
@@ -65,132 +94,31 @@
                 </div>
               </div>
             </div>
-            <div class="body-side">
-              <div class="search-row">
+            <div class="body-side body-side-scroll">
+              <div *ngFor="let item of searchResultData; let i = index" class="search-row ">
                 <div>
-                  <input class="m-r-20 m-t-0" type="checkbox">
+                  <input class="m-r-20 m-t-0" [(ngModel)]="item.element.checked" type="checkbox">
                 </div>
-                <div>
+                <div (click)="selectType(item.element, i)">
                   <div class="df ai-c jc-b m-b-7">
                     <div>
-                      About iPhone 7 and up
+                      {{item.element.title}}
                     </div>
-                    <div class="c-p delete-icon">
+                    <div (click)="detaleItem(searchResultData, i)" class="c-p delete-icon">
                       <img width="18px" src="assets/img/trash.png" alt="">
                     </div>
                   </div>
                   <div class="stick-row">
-                    <div class="ai-c df">
+                    <div *ngFor="let tag of item.element.tegs" class="ai-c df m-r-10">
                       <img class="m-r-3" src="assets/img/stiket.png" alt="">
-                      <div>
-                        Self Service
+                      <div class="context">
+                        {{tag}}
                       </div>
                     </div>
                   </div>
                   <div class="description">
-                    <p style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
-                      For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring up
-                      quick
-                      actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch,
-                      you can
-                      also
-                      press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions,
-                      even if
-                      it's
-                      simply the For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon
-                      to bring
-                      up
-                      quick actions. All apps have quick actions, even if it's simply the For self adjusting the 3D
-                      touch, you
-                      can also press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick
-                      actions,
-                      even if it's simply the
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="search-row">
-                <div>
-                  <input class="m-r-20 m-t-0" type="checkbox">
-                </div>
-                <div>
-                  <div class="df ai-c jc-b m-b-7">
-                    <div>
-                      About iPhone 7 and up
-                    </div>
-                    <div class="c-p delete-icon">
-                      <img width="18px" src="assets/img/trash.png" alt="">
-                    </div>
-                  </div>
-                  <div class="stick-row">
-                    <div class="ai-c df">
-                      <img class="m-r-3" src="assets/img/stiket.png" alt="">
-                      <div>
-                        Self Service
-                      </div>
-                    </div>
-                  </div>
-                  <div class="description">
-                    <p style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
-                      For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring up
-                      quick
-                      actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch,
-                      you can
-                      also
-                      press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions,
-                      even if
-                      it's
-                      simply the For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon
-                      to bring
-                      up
-                      quick actions. All apps have quick actions, even if it's simply the For self adjusting the 3D
-                      touch, you
-                      can also press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick
-                      actions,
-                      even if it's simply the
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="search-row">
-                <div>
-                  <input class="m-r-20 m-t-0" type="checkbox">
-                </div>
-                <div>
-                  <div class="df ai-c jc-b m-b-7">
-                    <div>
-                      About iPhone 7 and up
-                    </div>
-                    <div class="c-p delete-icon">
-                      <img width="18px" src="assets/img/trash.png" alt="">
-                    </div>
-                  </div>
-                  <div class="stick-row">
-                    <div class="ai-c df">
-                      <img class="m-r-3" src="assets/img/stiket.png" alt="">
-                      <div>
-                        Self Service
-                      </div>
-                    </div>
-                  </div>
-                  <div class="description">
-                    <p style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
-                      For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon to bring up
-                      quick
-                      actions. All apps have quick actions, even if it's simply the For self adjusting the 3D touch,
-                      you can
-                      also
-                      press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick actions,
-                      even if
-                      it's
-                      simply the For self adjusting the 3D touch, you can also press firmly (3D Touch) on an app icon
-                      to bring
-                      up
-                      quick actions. All apps have quick actions, even if it's simply the For self adjusting the 3D
-                      touch, you
-                      can also press firmly (3D Touch) on an app icon to bring up quick actions. All apps have quick
-                      actions,
-                      even if it's simply the
+                    <p class="context" style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                      {{item.element.text}}
                     </p>
                   </div>
                 </div>
@@ -204,66 +132,43 @@
                 Articles
               </div>
               <div class="df ai-c color-primary">
-                <img class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
+                <img [routerLink]="['/article']" class="m-r-10 c-p" src="assets/img/addArtictes.png" alt="">
                 <div class="m-r-30">
                   Add Article
                 </div>
-                <img class="c-p" width="22px" src="assets/img/trash.png" alt="">
+                <img (click)="deleteArticles()" class="c-p" width="22px" src="assets/img/trash.png" alt="">
               </div>
             </div>
             <div class="body-side">
-              <div class="articles-row jc-b">
+              <div *ngFor="let item of articlesData[selectedType]; let i = index" (click)="selectType(item, i)" class="articles-row jc-b">
                 <div class="df ai-c">
-                  <input class="m-r-20" type="checkbox">
-                  <img class="m-r-5" src="assets/img/color-folder.png" alt="">
+                  <input [(ngModel)]="item.checked" class="m-r-20" type="checkbox">
+                  <i *ngIf="item.type === 'folder'" class="m-r-5" class="fa fa-folder m-r-20 icon-folder"></i>
                   <div>
-                    iPhone 7
+                    {{item.name}}
                   </div>
                 </div>
-                <div class="c-p icons">
-                  <img width="18px" src="assets/img/trash.png" alt="">
-                </div>
-              </div>
-              <div class="articles-row jc-b">
-                <div class="df ai-c">
-                  <input class="m-r-20" type="checkbox">
-                  <img class="m-r-5" src="assets/img/color-folder.png" alt="">
-                  <div>
-                    iPhone 7
-                  </div>
-                </div>
-                <div class="c-p icons">
-                  <img width="18px" src="assets/img/trash.png" alt="">
-                </div>
-              </div>
-              <div class="articles-row jc-b">
-                <div class="df ai-c">
-                  <input class="m-r-20" type="checkbox">
-                  <img class="m-r-5" src="assets/img/color-folder.png" alt="">
-                  <div>
-                    iPhone 7
-                  </div>
-                </div>
-                <div class="c-p icons">
+                <div (click)="detaleItem(articlesData[selectedType], i)" class="c-p icons">
                   <img width="18px" src="assets/img/trash.png" alt="">
                 </div>
               </div>
             </div>
           </div>
 
-          <div *ngIf="article" class="article-side">
+          <div *ngIf="article && selectedText" class="article-side">
             <div class="side-head">
               <div>
                 Article
               </div>
               <div class="df ai-c">
-                <img class="m-r-10 c-p" src="assets/img/arrow-left.png" alt="">
-                2 of 38
-                <img class="m-l-10 rotate-180 c-p" src="assets/img/arrow-left.png" alt="">
+                <img (click)="selectedTextAction('prev')" class="m-r-10 c-p" src="assets/img/arrow-left.png" alt="">
+                {{editPageCount / 5}} of {{ editPageCountValue }}
+                <img (click)="selectedTextAction('next')" class="m-l-10 rotate-180 c-p" src="assets/img/arrow-left.png"
+                  alt="">
               </div>
               <div class="df ai-c">
                 <div class="m-r-30 c-p">
-                  <img src="assets/img/editArticle.png" alt="">
+                  <img [routerLink]="[ '/article', id]" a src="assets/img/editArticle.png" alt="">
                 </div>
                 <img class="c-p" width="22px" src="assets/img/trash.png" alt="">
               </div>
@@ -273,32 +178,26 @@
                 <div class="m-r-20 p-t-12">
                   Tags:
                 </div>
-                <div class="chips">
-                  Self Service
-                  <img class="close c-p" src="assets/img/close.png" alt="">
+                <div *ngFor="let tags of selectedText.tegs; let i = index" class="chips">
+                  {{tags}}
+                  <img (click)="detaleItem(selectedText.tegs, i)" class="close c-p" src="assets/img/close.png" alt="">
                 </div>
-                <input class="add-tag" type="text" placeholder="Add tag" pInputText />
+                <input [(ngModel)]="addTagField" class="add-tag" type="text" (keyup.enter)="addTags(selectedText.tegs, addTagField)"
+                  placeholder="Add tag" pInputText />
               </div>
               <div class="p-t-10 p-l-25 p-r-25 p-b-25">
                 <p class="fs-11">
                   Content > Tecnical > Phones > iPhone > iPhone 9 >
                 </p>
                 <h4 class="fs-14">
-                  Using 3D touch
+                  {{
+                  selectedText.title
+                  }}
                 </h4>
                 <p class="fs-12">
-                  3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead
-                  of apps,
-                  reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live
-                  Photos, vary
-                  stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
-                </p>
-                <p class="fs-12">
-                  3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead
-                  of apps,
-                  reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live
-                  Photos, vary
-                  stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+                  <span *ngFor="let item of previewText">
+                    {{item}}.
+                  </span>
                 </p>
               </div>
               <div class="title-row jc-b bg">
@@ -308,32 +207,21 @@
                   </div>
                 </div>
                 <div class="df ai-c">
-                  <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
-                  <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+                  <img (click)="deleteQuestion()" class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
+                  <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
                 </div>
               </div>
-              <div class="articles-row jc-b">
+              <div *ngFor="let item of selectedText.questins; let i = index" class="articles-row jc-b">
                 <div class="df ai-c">
-                  <input class="m-r-20" type="checkbox">
+                  <input [(ngModel)]="questuonSettings[i]" class="m-r-20" type="checkbox">
                   <div>
-                    Which iPhone, iPad, and iPod touch models support iOS 12?
+                    {{item}}
                   </div>
                 </div>
                 <div class="c-p icons df ai-c">
-                  <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
-                  <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
-                </div>
-              </div>
-              <div class="articles-row jc-b">
-                <div class="df ai-c">
-                  <input class="m-r-20" type="checkbox">
-                  <div>
-                    Which iPhone, iPad, and iPod touch models support iOS 12?
-                  </div>
-                </div>
-                <div class="c-p icons df ai-c">
-                  <img class="c-p m-r-5" width="22px" src="assets/img/trash.png" alt="">
-                  <img class="c-p" width="18px" src="assets/img/fasten.png" alt="">
+                  <img (click)="detaleItem(selectedText.questins, i)" class="c-p m-r-5" width="22px" src="assets/img/trash.png"
+                    alt="">
+                  <img (click)="showArticle = true" class="c-p" width="18px" src="assets/img/fasten.png" alt="">
                 </div>
               </div>
             </div>
