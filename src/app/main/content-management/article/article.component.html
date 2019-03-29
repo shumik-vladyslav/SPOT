@@ -38,7 +38,7 @@
       </div>
       <div class="df ai-c color-primary">
         <div class="c-p m-r-15">
-          <img src="assets/img/text-icon.png" alt="">
+          <img src="assets/img/text-icon.png"  (click)="copyClip()" alt="">
         </div>
         <div class="c-p m-r-25 pos-r">
           <img src="assets/img/text-icon.png" alt="">
@@ -134,7 +134,7 @@
           </div>
           <div class="article-section-body">
             <div *ngIf="item.text">
-              <div class="text">
+              <div id="text{{i}}" class="text" (click)="selectionId = i">
                 {{item.text}}
               </div>
               <textarea *ngIf="showEdit === i" [(ngModel)]="item.text"></textarea>

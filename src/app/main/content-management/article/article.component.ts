@@ -156,4 +156,19 @@ export class ArticleComponent implements OnInit {
     }
     this.dialog = false;
   }
+  selectionId;
+  copyClip(){
+    console.log(this.selectionId);
+    var reference_element = document.querySelector('#text' + this.selectionId);
+
+  	var range = document.createRange();  
+  	range.selectNodeContents(reference_element);
+  
+  	window.getSelection().addRange(range);
+  
+  	var success = document.execCommand('copy');
+  
+    window.getSelection().removeRange(range);
+    console.log(document.execCommand('copy'))
+  }
 }
