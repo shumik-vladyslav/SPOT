@@ -25,19 +25,12 @@ export class LinkArticleComponent implements OnInit {
 
 
   constructor() { }
-  article = true;
-  articles = true;
-  searchResult = false;
   welcome = true;
-  folders = true;
   dublicate = false;
 
   id;
   addTagField;
   math = Math;
-  searchIn: SelectItem[];
-  selectedSearchIn;
-  filesTree0;
   questuonSettings = {};
   dublicateQuestionData = [
     {
