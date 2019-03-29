@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { SelectItem } from "primeng/api";
 import { SelectItemGroup } from "primeng/api";
+declare var $;
+declare var Mark;
 
 @Component({
   selector: "app-content-management",
@@ -101,7 +103,7 @@ export class ContentManagementComponent implements OnInit {
       questins: ['Using 3D touch models support iOS 12?', 'Which iPhone, iPad, and iPod touch models support iOS 10?'],
       tegs: ['multi', 'using'],
       title: "Using 3D touch",
-      text: "sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
+      text: "multitouch sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
     }
   ];
   searchText = '';
@@ -135,6 +137,23 @@ export class ContentManagementComponent implements OnInit {
       }
     });
     console.log(e, this.searchResultData);
+
+    setTimeout(() => {
+
+      var divs = document.querySelectorAll('.context');
+
+      [].forEach.call(divs, function(div) {
+        console.log(div)
+        var options = {};
+        var markInstance = new Mark(div);
+  
+        markInstance.unmark({
+          done: function(){
+            markInstance.mark(e, options);
+          }
+        });
+      });
+    }, 100);
   }
 
   onNodeSelect(e, i) {

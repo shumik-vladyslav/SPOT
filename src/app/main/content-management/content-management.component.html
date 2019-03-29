@@ -1,4 +1,5 @@
 <div class="head">
+  
   <div class="df full-width">
     <div class="pos-r">
       <p-dropdown class="search-dropdown" [(ngModel)]="selectedSearchIn" [options]="searchIn"></p-dropdown>
@@ -143,7 +144,7 @@
     </div>
   </div>
 
-  <div *ngIf="searchResult" class="articles-side full-width">
+  <div *ngIf="searchResult" class="articles-side full-width ">
     <div class="side-head">
       <div>
         Search Results
@@ -163,7 +164,7 @@
       </div>
     </div>
     <div class="body-side body-side-scroll">
-      <div *ngFor="let item of searchResultData; let i = index" class="search-row">
+      <div *ngFor="let item of searchResultData; let i = index" class="search-row ">
         <div>
           <input class="m-r-20 m-t-0" [(ngModel)]="item.element.checked" type="checkbox">
         </div>
@@ -179,13 +180,13 @@
           <div class="stick-row">
             <div *ngFor="let tag of item.element.tegs" class="ai-c df m-r-10">
               <img class="m-r-3" src="assets/img/stiket.png" alt="">
-              <div>
+              <div class="context">
                 {{tag}}
               </div>
             </div>
           </div>
           <div class="description">
-            <p style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+            <p class="context" style="margin: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
               {{item.element.text}}
             </p>
           </div>
