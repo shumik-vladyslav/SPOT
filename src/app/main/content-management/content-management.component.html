@@ -195,8 +195,8 @@
     </div>
   </div>
 
-  <div *ngIf="articles" class="articles-side">
-    <div class="side-head">
+  <div *ngIf="articles && selectedType" class="articles-side">
+    <div class="side-head"> 
       <div>
         Articles
       </div>
@@ -209,7 +209,7 @@
       </div>
     </div>
     <div class="body-side">
-      <div *ngFor="let item of articlesData; let i = index" (click)="selectType(item, i)" class="articles-row jc-b">
+      <div *ngFor="let item of articlesData[selectedType]; let i = index" (click)="selectType(item, i)" class="articles-row jc-b">
         <div class="df ai-c">
           <input [(ngModel)]="item.checked" class="m-r-20" type="checkbox">
           <img *ngIf="item.type === 'folder'" class="m-r-5" src="assets/img/color-folder.png" alt="">
@@ -217,7 +217,7 @@
             {{item.name}}
           </div>
         </div>
-        <div (click)="detaleItem(articlesData, i)" class="c-p icons">
+        <div (click)="detaleItem(articlesData[selectedType], i)" class="c-p icons">
           <img width="18px" src="assets/img/trash.png" alt="">
         </div>
       </div>

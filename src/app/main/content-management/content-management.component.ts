@@ -77,35 +77,63 @@ export class ContentManagementComponent implements OnInit {
       ]
     }
   ];
-  articlesData = [
-    { id: "1", name: "iPhone 7", checked: false, type: "folder" },
-    { id: "2", name: "iPhone 6", checked: false, type: "folder" },
-    { id: "3", name: "iPhone 5", checked: false, type: "folder" },
-    {
-      id: "4", 
-      name: "text",
-      checked: false,
-      type: "text",
-      title: "Using 3D touch",
-      tegs: ['3d touch', 'screen'],
-      questins: ['Which iPhone, iPad, and iPod touch models support iOS 1?','Which iPhone, iPad, and iPod touch models support iOS 2?','Which iPhone, iPad, and iPod touch models support iOS 3?','Which iPhone, iPad, and iPod touch models support iOS 4?', 'Which iPhone, iPad, and iPod touch models support iOS 5?'],
-      text: `3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
-      3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
-      3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
-      3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
-      3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.`
-    },
-    {
-      id: "5", 
-      name: "text 5",
-      checked: false,
-      type: "text",
-      questins: ['Using 3D touch models support iOS 12?', 'Which iPhone, iPad, and iPod touch models support iOS 10?'],
-      tegs: ['multi', 'using'],
-      title: "Using 3D touch",
-      text: "multitouch sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
-    }
-  ];
+  selectedType;
+  articlesData = {
+    Android: [
+      { id: "1", name: "Android 7", checked: false, type: "folder" },
+      { id: "2", name: "Android 6", checked: false, type: "folder" },
+      { id: "3", name: "Android 5", checked: false, type: "folder" },
+      {
+        id: "4", 
+        name: "text",
+        checked: false,
+        type: "text",
+        title: "Using 3D touch",
+        tegs: ['3d touch', 'screen'],
+        questins: ['Which iPhone, iPad, and iPod touch models support iOS 1?','Which iPhone, iPad, and iPod touch models support iOS 2?','Which iPhone, iPad, and iPod touch models support iOS 3?','Which iPhone, iPad, and iPod touch models support iOS 4?', 'Which iPhone, iPad, and iPod touch models support iOS 5?'],
+        text: `3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+        3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+        3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+        3D Touch is multitouch made multidimensional. With it you can press3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.
+        3D Touch is multitouch made multidimensional. With it you can press deeply to launch actions instead of apps, reply to notifications, preview messages and links, switch keyboards, switch apps, animate Live Photos, vary stroke width, and more. It's like a wormhole through iOS that lets you move around faster than ever.`
+      },
+      {
+        id: "5", 
+        name: "text 5",
+        checked: false,
+        type: "text",
+        questins: ['Using 3D touch models support iOS 12?', 'Which iPhone, iPad, and iPod touch models support iOS 10?'],
+        tegs: ['multi', 'using'],
+        title: "Using 3D touch",
+        text: "multitouch sdfsdfsdfsd sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
+      }
+    ],
+    Apple: [
+      { id: "1", name: "iPhone 7", checked: false, type: "folder" },
+      { id: "2", name: "iPhone 6", checked: false, type: "folder" },
+      { id: "3", name: "iPhone 5", checked: false, type: "folder" },
+      {
+        id: "5", 
+        name: "text 5",
+        checked: false,
+        type: "text",
+        questins: ['Using 3D touch models support iOS 12?', 'Which iPhone, iPad, and iPod touch models support iOS 10?'],
+        tegs: ['multi', 'using'],
+        title: "Using 3D touch",
+        text: "2 sdfs dfs dfsd fsdf sdf sdfsdfsdfsdfsdf"
+      }
+    ],
+    Windows:[
+      { id: "1", name: "w1", checked: false, type: "folder" },
+      { id: "2", name: "w2", checked: false, type: "folder" },
+      { id: "3", name: "w3", checked: false, type: "folder" },
+    ],
+    Devices: [
+      { id: "1", name: "Windows", checked: false, type: "folder" },
+      { id: "2", name: "Apple", checked: false, type: "folder" },
+      { id: "3", name: "Android", checked: false, type: "folder" },
+    ]
+  }
   searchText = '';
   selectedFolder;
   selectedText;
@@ -115,7 +143,7 @@ export class ContentManagementComponent implements OnInit {
   previewText;
   searchTextChange(e) {
     this.searchResultData = [];
-    this.articlesData.forEach((element, index) => {
+    this.articlesData[this.selectedType].forEach((element, index) => {
       if (element.type === 'text') {
         if (element.text.includes(e)) {
           this.searchResultData.push({
@@ -157,6 +185,8 @@ export class ContentManagementComponent implements OnInit {
   }
 
   onNodeSelect(e, i) {
+    console.log(e);
+    this.selectedType = e.node.label;
     this.selectedFolder = e.node;
   }
   selectType(item, index) {
@@ -205,7 +235,7 @@ export class ContentManagementComponent implements OnInit {
   ngOnInit() {
     this.filesTree0 = [
       {
-        label: "Lazy Node 0",
+        label: "Devices",
         data: "Node 0",
         expandedIcon: "fa fa-folder-open",
         collapsedIcon: "fa fa-folder",
@@ -213,39 +243,25 @@ export class ContentManagementComponent implements OnInit {
         expanded: false,
         children: [
           {
-            label: "Lazy Node 0",
+            label: "Android",
             data: "Node 0",
             expandedIcon: "fa fa-folder-open",
             collapsedIcon: "fa fa-folder"
           },
           {
-            label: "Lazy Node 1",
+            label: "Apple",
             data: "Node 1",
             expandedIcon: "fa fa-folder-open",
             collapsedIcon: "fa fa-folder"
           },
           {
-            label: "Lazy Node 1",
+            label: "Windows",
             data: "Node 2",
             expandedIcon: "fa fa-folder-open",
             collapsedIcon: "fa fa-folder"
           }
         ]
       },
-      {
-        label: "Lazy Node 1",
-        data: "Node 1",
-        expandedIcon: "fa fa-folder-open",
-        collapsedIcon: "fa fa-folder",
-        expanded: false
-      },
-      {
-        label: "Lazy Node 2",
-        data: "Node 2",
-        expandedIcon: "fa fa-folder-open",
-        collapsedIcon: "fa fa-folder",
-        expanded: false
-      }
     ];
     this.searchIn = [
       { label: "Current Folder", value: "Current Folder" },
@@ -291,7 +307,7 @@ export class ContentManagementComponent implements OnInit {
     this.addTagField = '';
   }
   deleteArticles() {
-    this.articlesData = this.articlesData.filter(item => {
+    this.articlesData = this.articlesData[this.selectedType].filter(item => {
       if (item.checked === false) {
         return true;
       }
